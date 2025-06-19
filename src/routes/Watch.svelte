@@ -243,7 +243,7 @@
                         step="0.1"
                         value={currentTime}
                         oninput={onSliderChange}
-                        class="w-2/6 h-2 bg-gray-500 rounded-lg appearance-none accent-blue-500 absolute bottom-1 left-56"
+                        class="w-4/6 h-2 bg-gray-500 rounded-lg appearance-none accent-blue-500 absolute bottom-1 left-56"
                     />
                     {/if}
                 </div>
