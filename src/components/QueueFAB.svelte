@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { push } from "svelte-spa-router";
     import type { MediaItem } from "../lib/media_item";
     import { queue } from "../lib/queueStore";
     import { API_ROUTE } from "../lib/store";
@@ -22,10 +23,10 @@
         {:else}
             {#each list as item}
                 <div
-                    class="flex justify-between items-center bg-gray-800 px-4 py-2 rounded-lg shadow-inner"
+                     class="flex justify-between items-center bg-gray-800 px-4 py-2 rounded-lg shadow-inner"
+                     onclick={push(`/watch/${item.id}`)}
                 >
-
-                   <span class="overflow-auto">{item.name}</span>
+                <span class="overflow-auto">{item.name}</span>
                     <button
                         onclick={() => removeFromQueue(item.id)}
                         class="text-red-400 hover:text-red-600 text-lg font-bold"

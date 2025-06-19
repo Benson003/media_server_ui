@@ -7,7 +7,7 @@
   current_page.subscribe(val => page = val)
 
 </script>
-<ul class="flex justify-center gap-3 text-gray-900 dark:text-white">
+<ul class="flex justify-center gap-3 text-gray-900 dark:text-white w-svw fixed top-1 z-20">
     <li>
         <button
         onclick= {current_page.subtract}
@@ -40,7 +40,7 @@
         type="number"
         id="Page"
         value={page}
-        onchange={(e)=>current_page.set(e.currentTarget.valueAsNumber)}
+        onchangecapture={(e)=>current_page.set(e.currentTarget.valueAsNumber)}
         class="h-8 w-10 rounded border-gray-300 sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white"
       />/{ number_of_pages }</li>
 
