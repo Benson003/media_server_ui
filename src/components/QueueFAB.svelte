@@ -22,19 +22,26 @@
             <p class="text-sm text-gray-400 text-center">Queue is empty</p>
         {:else}
             {#each list as item}
-                <div
-                     class="flex justify-between items-center bg-gray-800 px-4 py-2 rounded-lg shadow-inner"
-                     onclick={push(`/watch/${item.id}`)}
+                <button
+
+                     class="flex justify-between items-center bg-gray-800 rounded-lg shadow-inner"
+                     onclick={(e)=>{
+                        e.stopPropagation();
+                        push(`/watch/${item.id}`);
+                        }}
                 >
-                <span class="overflow-auto">{item.name}</span>
-                    <button
-                        onclick={() => removeFromQueue(item.id)}
-                        class="text-red-400 hover:text-red-600 text-lg font-bold"
+                <span class="overflow-auto p-2">{item.name}</span>
+                    <span
+                        onclick={(e) => {
+                            e.stopPropagation();
+                            removeFromQueue(item.id);
+                            }}
+                        class="text-red-400 hover:text-red-600 text-lg ml-2 mt-0 mb-0 mr-0 p-2 bg-white font-bold rounded-br-lg rounded-tr-lg"
                         aria-label="Remove item"
                     >
                         ×
-                    </button>
-                </div>
+                        </span>
+                </button>
             {/each}
         {/if}
     </div>

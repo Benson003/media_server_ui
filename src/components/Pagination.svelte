@@ -1,15 +1,33 @@
 
 <script lang="ts">
+    import { onDestroy, onMount } from "svelte";
     import { current_page } from "../lib/store";
 
   let { number_of_pages } = $props();
   let page:number = $state(1);
-  current_page.subscribe(val => page = val)
+  current_page.subscribe(val => page = val);
 
-</script>
+  onMount(()=>window.addEventListener('keydown',keyboardListner));
+  onDestroy(()=>window.addEventListener('keydown',keyboardListner));
+
+  const keyboardListner = (e: KeyboardEvent)=>{
+    e.stopPropagation()
+    switch (e.key) {
+        case 'q':
+            document.getElementById("page_prev")?.click()
+            break;
+        case 'e':
+            document.getElementById("page_next")?.click()
+            break;
+        default:
+            break;
+    }
+  }
+  </script>
 <ul class="flex justify-center gap-3 text-gray-900 dark:text-white w-svw fixed top-1 z-20">
     <li>
         <button
+        id="page_prev"
         onclick= {current_page.subtract}
         disabled={page <= 1}
         class="grid size-12 place-content-center rounded border transition-colors rtl:rotate-180"
@@ -47,6 +65,7 @@
     <li>
 
         <button
+        id="page_next"
         disabled={page >= number_of_pages}
         onclick={current_page.add}
         class="grid size-12 place-content-center rounded border transition-colors rtl:rotate-180 aria-label-next-page"

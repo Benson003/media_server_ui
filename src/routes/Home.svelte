@@ -13,7 +13,7 @@
     let items: MediaItem[] = $derived([]);
 
     let page:number = $state(1)
-    const  count:number = 16;
+    const  count:number = 12;
     let number_of_pages: number = $state(1);
     current_page.subscribe(val=> page = val);
     let error = $state();
@@ -46,6 +46,7 @@
 <div class="bg-white dark:bg-gray-900">
     <Header/>
     <Pagination number_of_pages={number_of_pages}/>
+    <div class="h-40"></div>
 <main class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 bg-white dark:bg-gray-900 mb-3 p-4">
 {#each items as item}
 <VideoCard mediaItem={item}/>

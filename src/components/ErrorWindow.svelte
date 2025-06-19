@@ -1,10 +1,15 @@
 <script lang="ts">
+
+
     let { error } = $props();
+    const dismmis = () => {
+        error = false;
+    }
 </script>
 
 {#if error}
-    <div
-        class="fixed bottom-4 right-4 z-50 bg-red-600 text-white p-4 rounded-lg shadow-lg max-w-sm animate-bounce-in"
+    <div onclick={dismmis}
+        class="fixed bottom-4 left-4 z-50 bg-red-600 text-white p-4 rounded-lg shadow-lg max-w-sm animate-bounce-in"
     >
         <strong class="block mb-1">🚨 Error</strong>
         <p class="text-sm">{error}</p>
