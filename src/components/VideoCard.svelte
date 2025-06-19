@@ -16,7 +16,7 @@
 </script>
 
 <article
-    class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg dark:shadow-gray-700/25"
+    class="overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg hover:rotate-x-6 hover:rotate-y-6 dark:shadow-gray-700/25"
 >
     <img
         alt="Can't fetch the thumbnail for: {mediaItem.name}"
@@ -37,13 +37,13 @@
         <div class="mt-4 flex gap-2 flex-wrap">
             <button
                 onclick={navigateToWatch}
-                class="bg-green-600 hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-600 rounded-2xl px-4 py-2 font-bold text-white transition"
+                class="bg-green-600 hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-600 rounded-2xl px-4 py-2 font-bold text-white transition hover:-rotate-x-6 hover:-rotate-y-12 hover:-rotate-z-2"
             >
                 ▶ Watch Now
             </button>
             <button
                 onclick={addToQueue}
-                class="bg-gray-600 hover:bg-gray-700 dark:bg-gray-900 dark:hover:bg-gray-600 rounded-2xl px-4 py-2 font-bold text-white transition"
+                class="bg-gray-600 hover:bg-gray-700 dark:bg-gray-900 dark:hover:bg-gray-600 rounded-2xl px-4 py-2 font-bold text-white transition hover:-rotate-x-6 hover:-rotate-y-12 hover:border-2 hover:border-white  hover:-rotate-z-2"
             >
                 ➕ Add to Queue
             </button>
