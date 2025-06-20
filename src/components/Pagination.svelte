@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import { current_page } from "./store";
+    import { current_page } from "../lib/store";
 
   let { number_of_pages } = $props();
   let page:number = $state(1);

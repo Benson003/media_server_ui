@@ -3,8 +3,9 @@
     import Home from "./routes/Home.svelte";
     import Watch from "./routes/Watch.svelte";
     import NotFound from "./routes/NotFound.svelte";
+    import QueueFab from "./components/QueueFAB.svelte";
 
-    
+
 
     let routes = {
         "/":Home,

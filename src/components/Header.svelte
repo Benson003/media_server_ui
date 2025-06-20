@@ -6,5 +6,11 @@
       <div class="flex flex-1 items-center justify-end md:justify-between text-2xl text-white font-bold">
         Media Server
       </div>
+      <div class="w-6 h-6 rounded-4xl fixed bottom-4 right-3">
+        <span class="w-3 h-1 rounded-lg pt-1 pb-1 mb-2 mt-2"></span>
+        <span class="w-3 h-1 rounded-lg pt-1 pb-1 mb-2 mt-2"></span>
+        <span class="w-3 h-1 rounded-lg pt-1 pb-1 mb-2 mt-2"></span>
+    </div>
+
     </div>
   </header>
