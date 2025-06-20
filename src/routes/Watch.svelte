@@ -23,7 +23,10 @@
     });
 
     const toggleSidebar = () => (showSidebar = !showSidebar);
-    const goBack = () => push("/");
+    const goBack = () => {
+        removeFromQueue(params.id)
+        push("/")
+    };
 
     const fetchMediaInfo = async (id: string) => {
         try {
@@ -50,10 +53,14 @@
             fetchMediaInfo(params.id);
         }
     });
+    function removeFromQueue(id: string) {
+        queue.removeById(id);
+    }
 
     const playNext = () => {
         if (currentIndex >= 0 && currentIndex < queueList.length - 1) {
             const nextItem = queueList[currentIndex + 1];
+            removeFromQueue(params.id)
             push(`/watch/${nextItem.id}`);
         }
     };
@@ -74,7 +81,7 @@
                     controls
                     autoplay
                     class="w-full h-full object-contain rounded-2xl"
-                    on:ended={playNext}
+                    onended={playNext}
                 ></video>
             </div>
 
@@ -86,14 +93,14 @@
 
             <div class="mt-4 w-full max-w-5xl flex justify-between">
                 <button
-                    on:click={goBack}
+                    onclick={goBack}
                     class="bg-red-600 hover:bg-red-700 rounded-2xl px-4 py-2 font-bold text-white"
                 >
                     Go Back
                 </button>
 
                 <button
-                    on:click={toggleSidebar}
+                    onclick={toggleSidebar}
                     class="bg-gray-700 hover:bg-gray-600 rounded-2xl px-4 py-2 font-bold text-white"
                 >
                     {showSidebar ? "Hide Queue" : "Show Queue"}
@@ -120,7 +127,7 @@
 									{params.id === item.id
                                     ? 'bg-blue-700 font-semibold'
                                     : 'bg-gray-700 hover:bg-gray-600'}"
-                                on:click={() => push(`/watch/${item.id}`)}
+                                onclick={() => push(`/watch/${item.id}`)}
                             >
                                 <span class="truncate max-w-[200px]"
                                     >{item.name}</span
@@ -128,6 +135,17 @@
                                 <span class="text-xs text-gray-400"
                                     >{item.ext}</span
                                 >
+                                {#if !(params.id === item.id)}
+                                <button
+                                onclick={() => removeFromQueue(item.id)}
+                                class="text-red-400 hover:text-red-600 text-lg font-bold"
+                                aria-label="Remove item"
+                            >
+                                ×
+                            </button>
+
+                                {/if}
+
                             </li>
                         {/each}
                     </ul>
@@ -141,7 +159,7 @@
         >
             {errorMessage}
             <button
-                on:click={goBack}
+                onclick={goBack}
                 class="mt-4 bg-red-900 hover:bg-red-700 rounded-2xl px-4 py-2 font-bold text-white"
             >
                 Go Back

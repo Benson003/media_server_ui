@@ -13,7 +13,7 @@
     let items: MediaItem[] = $derived([]);
 
     let page:number = $state(1)
-    const  count:number = 8;
+    const  count:number = 16;
     let number_of_pages: number = $state(1);
     current_page.subscribe(val=> page = val);
     let error = $state();
