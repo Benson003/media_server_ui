@@ -78,10 +78,7 @@
     };
 
     const toggleSidebar = () => (showSidebar = !showSidebar);
-    const removeCurrentAndGoBack = () => {
-        queue.removeById(params.id);
-        push("/");
-    };
+
     const removeAndMaybeRedirect = (id: string) => {
         queue.removeById(id);
         if (id === params.id) push("/");
@@ -116,6 +113,10 @@
         }
     }
 
+    const goBack = () => {
+        push("/");
+    }
+
     const keyboardListner = (e: KeyboardEvent) => {
         e.stopPropagation();
         switch (e.key) {
@@ -137,7 +138,7 @@
                 break;
 
             case "Escape":
-                document.getElementById("escape")?.click();
+                goBack();
                 break;
             case " ":
                 togglePlayPause();
@@ -284,7 +285,7 @@
                     >
                     <button
                         onclick={togglePictureinPicture}
-                        class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl font-bold"
+                        class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl font-bold "
                         >{isPictureinPicture
                             ? " 🖼 Exit Picture in Picture "
                             : "🖼 Enable Picture in Picture"}</button
@@ -328,7 +329,7 @@
 
                 <div class="flex justify-between">
                     <button
-                        onclick={removeCurrentAndGoBack}
+                        onclick={goBack}
                         id="escape"
                         class="bg-red-600 hover:bg-red-700 rounded-2xl px-4 py-2 font-bold text-white"
                         >Go Back</button
@@ -392,7 +393,7 @@
         >
             {errorMessage}
             <button
-                onclick={removeCurrentAndGoBack}
+                onclick={goBack}
                 class="mt-4 bg-red-900 hover:bg-red-700 rounded-2xl px-4 py-2 font-bold text-white"
                 >Go Back</button
             >
