@@ -3,8 +3,33 @@
     import type { MediaItem } from "../lib/media_item";
     import { queue } from "../lib/queueStore";
     import { API_ROUTE } from "../lib/store";
+    import { onMount } from "svelte";
     let open = $state(false);
     let list: MediaItem[] = $state([]);
+
+    onMount(() => {
+        window.addEventListener('keydown',keyBoardListner);
+    });
+    const keyBoardListner = (e: KeyboardEvent) => {
+        e.stopPropagation()
+        switch (e.key) {
+            case 'w':
+                open = !open;
+                break
+            case 'x':
+                if(!queue.isEmpty()){
+                    queue.reset()
+                }
+                break;
+            case ' ':
+                if(!queue.isEmpty()){
+                    playFromHead()
+                }
+                break
+            default:
+                break;
+        }
+    }
 
     queue.subscribe((val) => (list = val));
 

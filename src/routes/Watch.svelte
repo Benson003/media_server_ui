@@ -208,10 +208,9 @@
         <div class="flex-1 p-4 flex flex-col items-center">
             <div
                 bind:this={wrapperElement}
-                class="w-full max-w-5xl aspect-video relative rounded-3xl overflow-hidden shadow-lg"
+                class="w-full {showSidebar? 'max-w-4xl':'max-w-6xl'} aspect-video relative rounded-3xl overflow-hidden shadow-lg"
             >
                 <div class="relative w-full h-full">
-                    <!-- svelte-ignore a11y_media_has_caption -->
                     <video
                         bind:this={videoElement}
                         src={`${$API_ROUTE}/media/${params.id}/stream`}

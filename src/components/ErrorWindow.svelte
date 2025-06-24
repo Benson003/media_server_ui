@@ -1,9 +1,24 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
 
 
     let { error } = $props();
     const dismmis = () => {
         error = false;
+    }
+    onMount(()=>{
+        window.addEventListener('keydown',keyBoardListner);
+    });
+    const keyBoardListner = (e:KeyboardEvent) =>{
+        e.stopPropagation()
+        switch (e.key) {
+            case 'Escape':
+                dismmis()
+                break;
+            default:
+                break;
+        }
     }
 </script>
 
