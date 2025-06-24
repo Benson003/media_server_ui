@@ -1,47 +1,143 @@
-# Svelte + TS + Vite
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+---
 
-## Recommended IDE Setup
+# Media Server UI (Svelte)
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+A modern, responsive media browser built in Svelte to complement the [Media Server API](https://github.com/Benson003/media-server). Browse, stream, and queue up your favorite local content — all through a slick dark-mode UI.
 
-## Need an official Svelte framework?
+---
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## Features
 
-## Technical considerations
+* 🎬 Native video playback with adaptive layout
+* 📂 Paginated media explorer
+* 🕹️ Media queue system (like YouTube)
+* 🌒 Tailwind CSS dark mode by default
+* 🧠 Built with Svelte 5 runes + Vite
 
-**Why use this over SvelteKit?**
+---
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+## Prerequisites
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+* [Node.js](https://nodejs.org/) v18+
+* [pnpm](https://pnpm.io/) (recommended)
+* A running instance of the [Media Server API](https://github.com/Benson003/media-server)
+* `.env` file with `VITE_API_HOST` key set
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+---
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+## Getting Started
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+1. **Clone the repository**
 
-**Why include `.vscode/extensions.json`?**
+   ```bash
+   git clone https://github.com/Benson003/media-ui-svelte.git
+   cd media-ui-svelte
+   ```
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+2. **Set API base URL in `.env`**
 
-**Why enable `allowJs` in the TS template?**
+   Create a file named `.env` in the project root:
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+   ```
+   VITE_API_HOST=http://localhost:8000
+   ```
 
-**Why is HMR not preserving my local component state?**
+3. **Install dependencies**
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
+   ```bash
+   pnpm install
+   ```
 
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+4. **Run the app**
+
+   ```bash
+   pnpm dev
+   ```
+
+   Then visit:
+
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## Environment Variables
+
+| Key             | Description                          |
+| --------------- | ------------------------------------ |
+| `VITE_API_HOST` | The base URL of the media API server |
+
+This is used throughout the app to fetch media listings, thumbnails, and video streams.
+
+---
+
+## Project Structure
+
+```
+src/
+├── lib/            # Shared stores, environment config, and utils
+├── routes/         # Svelte pages like /watch/[id]
+├── components/     # Reusable UI components
+└── app.html        # Vite's HTML entry point
+```
+
+In `src/lib/store.ts` (or similar), you can access the env variable like this:
 
 ```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+export const API_ROUTE = import.meta.env.VITE_API_HOST;
 ```
+
+---
+
+## Deployment
+
+Build the app:
+
+```bash
+pnpm build
+```
+
+Serve the output in `dist/` using any static file server:
+
+```bash
+pnpm install -g serve
+serve -s dist
+```
+
+Or copy the `dist/` folder into your Go server’s static handler.
+
+---
+
+## Troubleshooting
+
+* **CORS issues?**
+  Confirm your Go server includes a permissive CORS middleware that allows requests from `localhost:5173`.
+
+* **Thumbnails not loading?**
+  Make sure the backend has FFmpeg installed and the thumbnail endpoint works for each media ID.
+
+* **Blank video player?**
+  Confirm the `/media/:id/stream` endpoint supports HTTP Range headers (used by browsers for seeking).
+
+---
+
+## License
+
+MIT License — No restrictions. Go wild, or go *Overflow* 😏
+
+---
+
+## Author
+
+Built by **Benson**
+📧 [nwankwobenson29@gmail.com](mailto:nwankwobenson29@gmail.com)
+
+---
+
+> Plug it into the API, hit play, and enjoy. 
+> It’s your own personal Netflix — without the guilt or the fees. 
+
+---
+
